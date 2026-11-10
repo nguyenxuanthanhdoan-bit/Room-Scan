@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "roomscan-engine"
+version = "0.1.0"
+description = "Core AI & 3D Computational Geometry Pipeline for RoomScan AI"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.24.0",
+    "opencv-python>=4.8.0",
+    "open3d>=0.18.0",
+    "torch>=2.1.0",
+    "torchvision>=0.16.0",
+    "trimesh>=4.0.0",
+    "pydantic>=2.5.0",
+    "pyyaml>=6.0.1",
+    "shapely>=2.0.0",
+    "scipy>=1.11.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.9.0",
+    "ruff>=0.1.0"
+]

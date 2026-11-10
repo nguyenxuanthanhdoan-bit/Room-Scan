@@ -1,0 +1,27 @@
+# Default Pipeline Configuration for RoomScan Engine
+
+capture:
+  target_fps: 2
+  blur_threshold: 100.0  # Laplacian variance threshold to reject blurry frames
+  max_frames: 30
+
+depth:
+  model_name: "depth_anything_v2_vits"  # ViT-S for speed, ViT-L for quality
+  device: "cuda"                         # "cuda", "mps", or "cpu"
+  metric_scale_factor: 1.0
+
+pointcloud:
+  voxel_size: 0.02                       # 2cm downsampling voxel grid
+  nb_neighbors: 20                       # Statistical Outlier Removal
+  std_ratio: 2.0
+
+layout:
+  ransac_distance_threshold: 0.03        # 3cm plane thickness tolerance
+  ransac_num_iterations: 1500
+  floor_normal_tolerance_deg: 10.0       # Angle tolerance with vertical [0, 1, 0]
+  orthogonality_snap_deg: 5.0            # Snap walls within ±5° to 90°
+  default_ceiling_height: 2.8            # Standard ceiling height fallback in meters
+
+export:
+  formats: ["obj", "dxf"]
+  output_dir: "outputs"

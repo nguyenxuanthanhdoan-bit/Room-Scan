@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: roomscan_postgres
+    environment:
+      POSTGRES_USER: roomscan_user
+      POSTGRES_PASSWORD: roomscan_password
+      POSTGRES_DB: roomscan_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: roomscan_redis
+    ports:
+      - "6379:6379"
+
+  minio:
+    image: minio/minio
+    container_name: roomscan_minio
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio_admin
+      MINIO_ROOT_PASSWORD: minio_password
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  minio_data:
